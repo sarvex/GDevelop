@@ -4,7 +4,8 @@ import { Trans } from '@lingui/macro';
 import Container from '@material-ui/core/Container';
 import { ColumnStackLayout } from './Layout';
 import RaisedButton from '../UI/RaisedButton';
-import { Column, LargeSpacer } from './Grid';
+import FlatButton from '../UI/FlatButton';
+import { Column, Line, LargeSpacer } from './Grid';
 import HelpButton from '../UI/HelpButton';
 import Text from '../UI/Text';
 import TutorialButton from './TutorialButton';
@@ -14,13 +15,16 @@ import Add from './CustomSvgIcons/Add';
 type Props = {|
   title: React.Node,
   description: React.Node,
-  actionLabel: React.Node,
   helpPagePath?: string,
   tutorialId?: string,
   actionButtonId?: string,
-  onAction: () => void,
   isLoading?: boolean,
+  actionLabel: React.Node,
   actionIcon?: React.Node,
+  onAction: () => void,
+  secondaryActionLabel?: React.Node,
+  secondaryActionIcon?: React.Node,
+  onSecondaryAction?: () => void,
 |};
 
 const DefaultHelpButton = ({ helpPagePath }: { helpPagePath?: string }) => (
@@ -48,22 +52,36 @@ export const EmptyPlaceholder = (props: Props) => (
         </Text>
         <LargeSpacer />
         <ColumnStackLayout alignItems="center" noMargin>
-          <RaisedButton
-            label={props.actionLabel}
-            primary
-            onClick={props.onAction}
-            disabled={!!props.isLoading}
-            icon={
-              props.isLoading ? (
-                <CircularProgress size={24} />
-              ) : props.actionIcon ? (
-                props.actionIcon
-              ) : (
-                <Add />
-              )
-            }
-            id={props.actionButtonId}
-          />
+          <Line noMargin>
+            {props.secondaryActionLabel && (
+              <Column>
+                <FlatButton
+                  label={props.secondaryActionLabel}
+                  primary
+                  onClick={props.onSecondaryAction}
+                  disabled={!!props.isLoading}
+                  leftIcon={props.secondaryActionIcon}
+                  id={props.actionButtonId}
+                />
+              </Column>
+            )}
+            <RaisedButton
+              label={props.actionLabel}
+              primary
+              onClick={props.onAction}
+              disabled={!!props.isLoading}
+              icon={
+                props.isLoading ? (
+                  <CircularProgress size={24} />
+                ) : props.actionIcon ? (
+                  props.actionIcon
+                ) : (
+                  <Add />
+                )
+              }
+              id={props.actionButtonId}
+            />
+          </Line>
           {props.tutorialId ? (
             <TutorialButton
               tutorialId={props.tutorialId}
