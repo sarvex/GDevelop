@@ -17,8 +17,8 @@ type Props = {|
   description: React.Node,
   helpPagePath?: string,
   tutorialId?: string,
-  actionButtonId?: string,
   isLoading?: boolean,
+  actionButtonId?: string,
   actionLabel: React.Node,
   actionIcon?: React.Node,
   onAction: () => void,
@@ -53,7 +53,7 @@ export const EmptyPlaceholder = (props: Props) => (
         <LargeSpacer />
         <ColumnStackLayout alignItems="center" noMargin>
           <Line noMargin>
-            {props.secondaryActionLabel && (
+            {props.secondaryActionLabel && props.onSecondaryAction && (
               <Column>
                 <FlatButton
                   label={props.secondaryActionLabel}
@@ -61,7 +61,6 @@ export const EmptyPlaceholder = (props: Props) => (
                   onClick={props.onSecondaryAction}
                   disabled={!!props.isLoading}
                   leftIcon={props.secondaryActionIcon}
-                  id={props.actionButtonId}
                 />
               </Column>
             )}
