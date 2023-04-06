@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Trans } from '@lingui/macro';
 import Container from '@material-ui/core/Container';
 import { ColumnStackLayout } from './Layout';
+import { LineStackLayout } from '../UI/Layout';
 import RaisedButton from '../UI/RaisedButton';
 import FlatButton from '../UI/FlatButton';
 import { Column, Line, LargeSpacer } from './Grid';
@@ -52,9 +53,8 @@ export const EmptyPlaceholder = (props: Props) => (
         </Text>
         <LargeSpacer />
         <ColumnStackLayout alignItems="center" noMargin>
-          <Line noMargin>
+          <LineStackLayout noMargin>
             {props.secondaryActionLabel && props.onSecondaryAction && (
-              <Column>
                 <FlatButton
                   label={props.secondaryActionLabel}
                   primary
@@ -62,7 +62,6 @@ export const EmptyPlaceholder = (props: Props) => (
                   disabled={!!props.isLoading}
                   leftIcon={props.secondaryActionIcon}
                 />
-              </Column>
             )}
             <RaisedButton
               label={props.actionLabel}
