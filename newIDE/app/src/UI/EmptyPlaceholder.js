@@ -55,13 +55,13 @@ export const EmptyPlaceholder = (props: Props) => (
         <ColumnStackLayout alignItems="center" noMargin>
           <LineStackLayout noMargin>
             {props.secondaryActionLabel && props.onSecondaryAction && (
-                <FlatButton
-                  label={props.secondaryActionLabel}
-                  primary
-                  onClick={props.onSecondaryAction}
-                  disabled={!!props.isLoading}
-                  leftIcon={props.secondaryActionIcon}
-                />
+              <FlatButton
+                label={props.secondaryActionLabel}
+                primary
+                onClick={props.onSecondaryAction}
+                disabled={!!props.isLoading}
+                leftIcon={props.secondaryActionIcon}
+              />
             )}
             <RaisedButton
               label={props.actionLabel}
